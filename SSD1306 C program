@@ -9,5 +9,20 @@
 void _nop_  (void);
 void Delay_ms  (uint t);
 void WriteOneByte  (uchar m);   //Write one byte data for ssd1306.
-void WriteData  (uchar *P);     //Write Data for ssd1306 chip ram, may this not correct.
+void WriteData  (uchar *P);   //Write Data for ssd1306 chip ram, may this not correct.
+void WriteCommand  (uchar m);
 void Initilization  (void);
+void IIC_Start  (void);   //This function is IIC seriral begin function,when call this one IIC will go to start.
+void IIC_End  (void);   //This function is IIC serial end ,when data trancific was done.call this one.
+bit Ack (void);   //When data send or receive done.the devies will retrun one bit ack signal.
+void Pause  (void);  //Call function make one frame stop a moment ,and while next frame data recive done.
+void main (void)
+{
+   Initilization ();
+   while (1)
+   {
+      char Temp,i,j;
+      WriteCommand (0x81);
+      WriteData (0x10);
+   }
+}
