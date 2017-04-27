@@ -1,0 +1,13 @@
+#include <stdio.h>
+#inlucde <reg51.h>
+#include <intrins.h>
+//#inlude <SSD1306.H>
+
+#define uchar unsigned char
+#define uint unsigned int
+
+void _nop_  (void);
+void Delay_ms  (uint t);
+void WriteOneByte  (uchar m);   //Write one byte data for ssd1306.
+void WriteData  (uchar *P);     //Write Data for ssd1306 chip ram, may this not correct.
+void Initilization  (void);
