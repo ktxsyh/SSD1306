@@ -1,28 +1,113 @@
-#include <stdio.h>
-#inlucde <reg51.h>
+#include <reg52.h>
 #include <intrins.h>
-//#inlude <SSD1306.H>
+typedef unsigned char UB8;
 
-#define uchar unsigned char
-#define uint unsigned int
+#define unint unsgined int
+#define  LCM_PORT P1
+sbit LCM_RS = P3^0;
+sbit LCM_RW = P3^7;
+sbit LCM_ENABLE = P3^4;
+sbit LCM_CS1 = P3^1;
+sbit LCM_RESET = P3^6;
 
-void _nop_  (void);
-void Delay_ms  (uint t);
-void WriteOneByte  (uchar m);   //Write one byte data for ssd1306.
-void WriteData  (uchar *P);   //Write Data for ssd1306 chip ram, may this not correct.
-void WriteCommand  (uchar m);
-void Initilization  (void);
-void IIC_Start  (void);   //This function is IIC seriral begin function,when call this one IIC will go to start.
-void IIC_End  (void);   //This function is IIC serial end ,when data trancific was done.call this one.
-bit Ack (void);   //When data send or receive done.the devies will retrun one bit ack signal.
-void Pause  (void);  //Call function make one frame stop a moment ,and while next frame data recive done.
-void main (void)
+sbit STP = P2^0;
+sbit S_S = P2^1;
+
+void Inital_SSD1306BZ (void);
+void Write_Command (UB8);
+vvoid Write_Data (UB8);
+void Show (void);
+void Show1 (void);
+void Show2 (void);
+void Show3 (void);
+void Show4 (void);
+void Show5 (void);
+void Show6 (void);
+void Show7 (void);
+void Show8 (void);
+void Show9 (void);
+void Show10 (void);
+void Show11 (void);
+void Delay (unsigned char);
+void Stp_Sc (void);
+
+unsigned char code picture[8][128];
+unsigned char code picture1[8][128];
+unsigned char code picture2[8][128];
+unsigned char code picture3[8][128];
+unsigned char code picture4[8][128];
+unsigned char code picture5[8][128];
+unsigned char code picture6[8][128];
+
+void main ()
 {
-   Initilization ();
+   P2 = 0X00;
+   LCM_PORT = 0XFF;
+   Inital_SSD1306BZ ();
+   
    while (1)
    {
-      char Temp,i,j;
-      WriteCommand (0x81);
-      WriteData (0x10);
+      Show1();
+      Delay (15);
+      Stp_Sc ();
+      
+      Show2();    
+      Delay (15);
+      Stp_Sc ();
+      
+      Show3 ();
+      Delay (15);
+      Stp_Sc ();
+      
+      Show4 ();
+      Delay (15);
+      Stp_Sc ();
+      
+      Show5 ();
+      Delay ();
+      Stp_Sc ();
+      
+      Show6 ();
+      Delay ();
+      Stp_Sc ();
+      
+      Show7 ();
+      Delay ();
+      Stp_Sc ();
+      
+      Show8 ();
+      Delay (15);
+      Stp_Sc ();
    }
+}
+
+
+void Initial_SSD1306BZ ()
+{
+      LCM_RW = 0;
+      LCM_RS = 0;
+      LCM_CS1 = 0;
+      
+   
+      Write_Command (0xAE);
+      Write_Command (0x80);
+      Write_Command (0x3F);
+      Write_Command (0x00);
+      Write_Command (0x40);
+      Write_Command (0x8D);
+      Write_Command (0x10);
+      //Write_Command (0x14);
+      Write_Command (0xA1);
+      Write_Command (0XC8);
+      Write_Command (0xDA);
+      Write_Command (0x12);
+      Write_Command (0x81);
+      Write_Command (0XFF);
+      Write_Command (0xD9);
+      Write_Command (0x22);
+      Write_Command (0xDB);
+      Write_Command (0x40);
+      Write_Command (0xA4);
+      Write_Command (0xA6);
+      Write_Command (0xAF);
 }
