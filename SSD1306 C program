@@ -111,3 +111,177 @@ void Initial_SSD1306BZ ()
       Write_Command (0xA6);
       Write_Command (0xAF);
 }
+void Write_Data (UN8 datap)
+{
+   //LCM_CS1 = 0;
+   //LCM_RS = 1;
+   //LCM_RW = 0;
+   LCM_CS1 = 1;
+   LCM_RS = 1;
+   _nop_ ();
+   _nop_ ();
+   _nop_ ();
+   _nop_ ();
+   LCM_PORT = datap;
+   _nop_ ();
+   _nop_ ();
+   _nop_ ();
+   _nop_ ();
+   LCM_ENABLE = 1;
+   _nop_ ();
+   _nop_ ();
+   _nop_ ();
+   _nop_ ();
+   _nop_ ();
+   _nop_ ();
+   _nop_ ();
+   _nop_ ();
+   LCM_ENABLE = 0;
+   _nop_ ();
+   _nop_ ();
+   _nop_ ();
+   _nop_ ();
+   _nop_ ();
+   _nop_ ();
+   _nop_ ();
+   _nop_ ();
+   _nop_ ();
+   _nop_ ();
+   _nop_ ();
+   _nop_ ();
+   // LCM_ENABLE = 0;
+   // LCM_RW = 1;
+   // LCM_RS = 0;
+   // LCM_CS1 = 1;
+    LCM_RW = 1;
+    _nop_ ();
+    _nop_ ();
+    _nop_ ();
+    _nop_ ();
+    LCM_CS1 = 0;
+    LCM_RS = 1;
+    _nop_ ();
+    _nop_ ();
+    _nop_ ();
+    _nop_ ();
+}
+
+void Write_Command (UB8 command)
+{
+    LCM_CS1 = 0;
+    LCM_RS = 0;
+    LCM_RW = 0;
+    _nop_ ();
+    _nop_ ();
+    _nop_ ();
+    _nop_ ();
+    LCM_PORT =commmand ;
+    LCM_ENABLE = 1;
+    _nop_ ();
+    _nop_ ();
+    _nop_ ();
+    _nop_ ();
+    _nop_ ();
+    _nop_ ();
+    _nop_ ();
+    _nop_ ();
+    _nop_ ();
+    _nop_ ();
+    _nop_ ();
+    _nop_ ();
+    LCM_ENABLE = 0;
+    //LCM_RW = 1;
+    //LCM_RS = 1;
+    //LCM_CS1 = 1;
+    LCM_RW = 1;
+    _nop_ ();
+    _nop_ ();
+    _nop_ ();
+    _nop_ ();
+    LCM_RS = 0;
+    LCM_CS1 = 0;
+    _nop_ ();
+    _nop_ ();
+    _nop_ ();
+    _nop_ ();
+}
+
+void Show1 ()
+{
+   UB8 x,y,Z = 0XB0;
+   for (x=0;x<8;x++)
+   {
+     Write_Command (Z);
+     Z++;
+     Write_Command (0x10);
+     Write_Command (0x00);
+     for (y=0;y<128;y++)
+     {
+        Write_Data (picture6[x][y]);
+     }
+   }
+}
+
+void Show1 ()
+{
+   UB8 x,y,Z =0xb0;
+   for (x=0;x<8;x++)
+    {
+      Write_Command (Z);
+      Z++;
+      Write_Command (0x11);
+      Write_Command (0x02);
+      for (y=0;y<128;y++)
+       {
+         Write_Data (0xff);
+         _nop_ ();
+         _nop_ ();
+         _nop_ ();
+         _nop_ ();
+       }
+    }
+}
+
+void Show2 (void)
+{
+  UB8 x,y,Z =0xB0;
+   for (X=0;X<8;X++)
+     {
+         Write_Command (Z);
+         Z++;
+         Write_Command (0x10);
+         Write_Command (0x00);
+         for (y=0;y<128;y++)
+         {
+           Write_Data (picture1[x][y]);
+         }
+     }
+}
+void Delay (unsigned char coun )
+{
+   unsigned char i,j,k;
+   
+   for (k = 0;k< coun;k++)
+   {
+      for (j= 0;j<150;j++)
+      {
+         for (i=0;i<200;i++)
+            ;
+      }
+   }
+}
+
+void Stp_Sc ()
+{
+     wiile (S_S == 1)
+     {
+        if (S_S==0)
+        {
+          break;
+        }
+        if (STP == 1)
+        {
+          break;
+        }
+     }
+}
